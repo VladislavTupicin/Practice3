@@ -1,27 +1,69 @@
 package part5.part5_1;
 
+import java.time.LocalDate;
+
 public class ZooDemo {
     public static void main(String[] args) {
+        System.out.println("Group: ИТ-31");
+        System.out.println("Sequence number: 1");
+        System.out.println("Date: " + LocalDate.now());
+        System.out.println("=".repeat(50));
+        System.out.println();
+
         Zoo zoo = new Zoo();
 
-        Lion lion = new Lion("Simba", 5, 180.0, 25);
-        Elephant elephant = new Elephant("Dumbo", 12, 1200.0, 40);
+        // Добавление животных
+        System.out.println("=== Добавление животных ===");
+        Lion simba = new Lion("Симба", 5, 180);
+        Lion nala = new Lion("Нала", 4, 160);
+        Elephant dumbo = new Elephant("Дамбо", 10, 3500);
+        Elephant horton = new Elephant("Хортон", 8, 3200);
 
-        zoo.addAnimal(lion);
-        zoo.addAnimal(elephant);
+        zoo.addAnimal(simba);
+        zoo.addAnimal(nala);
+        zoo.addAnimal(dumbo);
+        zoo.addAnimal(horton);
 
+        zoo.listAllAnimals();
+
+        // Животные издают звуки
         zoo.makeNoise();
-        lion.roar();
-        elephant.trumpet();
 
-        lion.train("сидеть");
-        lion.train("голос");
-        System.out.println("Команды льва: " + lion.listCommands());
+        // Специфические действия
+        System.out.println("\n=== Специфические действия ===");
+        simba.roar();
+        simba.hunt();
+        dumbo.trumpet();
+        dumbo.graze();
 
-        System.out.println("Голодные: " + zoo.getHungryAnimals().size());
+        // Проверка голодных животных
+        zoo.printHungryAnimals();
+
+        // Кормление
         zoo.feedAll();
-        System.out.println("Голодные после кормления: " + zoo.getHungryAnimals().size());
 
-        System.out.println("Поиск Simba: " + zoo.findAnimal("Simba").isPresent());
+        zoo.printHungryAnimals();
+
+        // Поиск животного
+        System.out.println("\n=== Поиск животного ===");
+        zoo.findAnimal("Симба").ifPresentOrElse(
+                a -> System.out.println("Найден: " + a),
+                () -> System.out.println("Животное не найдено")
+        );
+
+        zoo.findAnimal("Годзилла").ifPresentOrElse(
+                a -> System.out.println("Найден: " + a),
+                () -> System.out.println("Животное не найдено")
+        );
+
+        // Демонстрация работы с Trainable (добавим обучаемое животное)
+        System.out.println("\n=== Дрессировка ===");
+        // Создадим класс Dog (можно добавить позже)
+        System.out.println("Примечание: Животные в текущей реализации не реализуют Trainable.");
+        System.out.println("Для демонстрации интерфейса можно добавить класс Dog.");
+
+        // Финальный отчёт
+        System.out.println("\n=== Итоговое состояние зоопарка ===");
+        zoo.listAllAnimals();
     }
 }

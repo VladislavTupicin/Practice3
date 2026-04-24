@@ -4,15 +4,23 @@ import part3.part3_1.interfaces.Electric;
 
 public class ElectricCar extends Car implements Electric {
     private double batteryLevel;
-    private final double maxRangeKm;
+    private double maxRangeKm;
 
-    public ElectricCar(
-        String brand, String model, int year, double fuelLevel, int doors, boolean automatic,
-        double batteryLevel, double maxRangeKm
-    ) {
-        super(brand, model, year, fuelLevel, doors, automatic);
-        this.batteryLevel = batteryLevel;
+    public ElectricCar(String brand, String model, int year, int doors,
+                       boolean automatic, double maxRangeKm) {
+        super(brand, model, year, doors, automatic);
+        this.batteryLevel = 0.8;
         this.maxRangeKm = maxRangeKm;
+    }
+
+    @Override
+    public double getFuelConsumption() {
+        return 0;
+    }
+
+    @Override
+    public String getType() {
+        return "Электромобиль";
     }
 
     @Override
@@ -22,27 +30,11 @@ public class ElectricCar extends Car implements Electric {
 
     @Override
     public double getRangeKm() {
-        // TODO: запас хода = maxRangeKm * batteryLevel.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-        return 0.0;
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
+        return maxRangeKm * batteryLevel;
     }
 
     @Override
     public void charge(double hours) {
-        // TODO: +20% в час, максимум 100%.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
-    }
-
-    @Override
-    public double getFuelConsumption() {
-        return 0.0;
-    }
-
-    @Override
-    public String getType() {
-        return "ElectricCar";
+        batteryLevel = Math.min(1.0, batteryLevel + hours * 0.2);
     }
 }

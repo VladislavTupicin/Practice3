@@ -4,31 +4,25 @@ import java.time.LocalDate;
 
 public class NumberClassifier {
 
-    /**
-     * Классифицирует число по диапазонам.
-     * Подсказка 1: интервалы должны быть непересекающимися.
-     * Подсказка 2: проверяйте от самых специфичных граничных случаев.
-     */
     public static String classify(int number) {
-        // TODO: верните категорию для number по условию задания.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-        if (number < 0) return "< 0";
-        return "TODO";
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
+        if (number < 0) return "отрицательное";
+        if (number == 0) return "ноль";
+        if (number < 10) return "однозначное";
+        if (number < 100) return "двузначное";
+        if (number < 1000) return "трёхзначное";
+        return "большое (четырехзначное и более)";
     }
 
     public static void main(String[] args) {
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-        System.out.println("Group: ИМЯ_ВАШЕЙ_ГРУППЫ");
-        System.out.println("Sequence number: ВАШ_ПОРЯДКОВЫЙ_НОМЕР_В_ГРУППЕ");
+        // Информация о студенте
+        System.out.println("Group: ИТ-31");          // замени на свою группу
+        System.out.println("Sequence number: 1");     // замени на свой номер
         System.out.println("Date: " + LocalDate.now());
-         // ▲ КОНЕЦ ВАШЕГО КОДА ▲
 
+        // Тестирование
         int[] samples = {-5, 0, 7, 42, 100, 1000, -999};
         for (int n : samples) {
             System.out.println(n + " -> " + classify(n));
         }
-        // Проверь себя: 0 -> ноль, 7 -> однозначное, 1000 -> большое
-        // Типичные ошибки: пропущены края 9/10/99/100/999/1000.
     }
 }

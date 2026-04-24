@@ -1,32 +1,26 @@
 package part3.part3_1.model;
 
 public class Car extends Vehicle {
-    private final int doors;
-    private final boolean automatic;
+    private int doors;
+    private boolean automatic;
 
-    public Car(String brand, String model, int year, double fuelLevel, int doors, boolean automatic) {
-        super(brand, model, year, fuelLevel);
+    public Car(String brand, String model, int year, int doors, boolean automatic) {
+        super(brand, model, year);
         this.doors = doors;
         this.automatic = automatic;
     }
 
-    public int getDoors() { return doors; }
-    public boolean isAutomatic() { return automatic; }
-
     @Override
     public double getFuelConsumption() {
-        // TODO: 9.5 для automatic, 8.0 для manual.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-        return 0.0;
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
+        return automatic ? 9.5 : 8.0;
     }
 
     @Override
     public String getType() {
-        return "Car";
+        return "Легковой автомобиль";
     }
 
     public void honk() {
-        System.out.println(getBrand() + " " + getModel() + ": beep-beep!");
+        System.out.println(getBrand() + " " + getModel() + ": Бип-бип!");
     }
 }

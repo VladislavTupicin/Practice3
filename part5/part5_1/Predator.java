@@ -1,14 +1,20 @@
 package part5.part5_1;
 
 public abstract class Predator extends Animal {
-    protected Predator(String name, int age, double weight, int energyLevel) {
-        super(name, age, weight, energyLevel);
+
+    public Predator(String name, int age, double weight) {
+        super(name, age, weight);
     }
 
     public void hunt() {
-        // TODO: +30 к energyLevel (макс 100), weight -= 0.5.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
+        if (energyLevel < 20) {
+            System.out.println(name + " слишком устал для охоты!");
+            return;
+        }
+        energyLevel += 30;
+        weight -= 0.5;
+        if (energyLevel > 100) energyLevel = 100;
+        if (weight < 0) weight = 0;
+        System.out.println(name + " охотится! Энергия: " + String.format("%.1f", energyLevel));
     }
 }

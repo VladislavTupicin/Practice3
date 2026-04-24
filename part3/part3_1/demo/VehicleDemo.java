@@ -1,30 +1,52 @@
 package part3.part3_1.demo;
 
+import part3.part3_1.model.*;
+import part3.part3_1.interfaces.Electric;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import part3.part3_1.interfaces.Electric;
-import part3.part3_1.model.Car;
-import part3.part3_1.model.ElectricCar;
-import part3.part3_1.model.Truck;
-import part3.part3_1.model.Vehicle;
 
 public class VehicleDemo {
     public static void main(String[] args) {
-        List<Vehicle> fleet = new ArrayList<>();
-        fleet.add(new Car("Toyota", "Camry", 2020, 0.6, 4, true));
-        fleet.add(new Car("Lada", "Vesta", 2021, 0.5, 4, false));
-        fleet.add(new Truck("Kamaz", "5490", 2019, 0.7, 12.0));
-        fleet.add(new ElectricCar("Tesla", "Model 3", 2022, 0.0, 4, true, 0.8, 550));
+        System.out.println("Group: ИТ-31");
+        System.out.println("Date: " + LocalDate.now());
+        System.out.println();
 
-        double distance = 500.0;
-        for (Vehicle v : fleet) {
-            System.out.printf("%s | %s | fuel for %.0f km: %.2f%n",
-                v.getType(), v, distance, v.calculateFuelNeeded(distance));
-            if (v instanceof Car car) {
-                car.honk();
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        Car toyota = new Car("Toyota", "Camry", 2022, 4, true);
+        Car lada = new Car("Lada", "Vesta", 2023, 4, false);
+        Truck kamaz = new Truck("Kamaz", "5490", 2021, 15.0);
+        ElectricCar tesla = new ElectricCar("Tesla", "Model 3", 2024, 4, true, 600);
+
+        vehicles.add(toyota);
+        vehicles.add(lada);
+        vehicles.add(kamaz);
+        vehicles.add(tesla);
+
+        System.out.println("=== Информация о транспортных средствах ===\n");
+
+        for (Vehicle v : vehicles) {
+            System.out.println("Тип: " + v.getType());
+            System.out.println("Модель: " + v.getBrand() + " " + v.getModel());
+            System.out.println("Расход: " + v.getFuelConsumption() + " л/100км");
+            System.out.printf("На 500 км нужно: %.2f л%n", v.calculateFuelNeeded(500));
+
+            if (v instanceof ElectricCar) {
+                ElectricCar ev = (ElectricCar) v;
+                System.out.printf("Запас хода: %.0f км%n", ev.getRangeKm());
             }
-            if (v instanceof Electric electric) {
-                System.out.printf("  Электрозапас хода: %.1f км%n", electric.getRangeKm());
+            System.out.println("------------------------");
+        }
+
+        System.out.println("\n=== Полиморфизм ===\n");
+
+        for (Vehicle v : vehicles) {
+            if (v instanceof Car) {
+                ((Car) v).honk();
+            }
+            if (v instanceof Electric) {
+                System.out.println("Запас хода: " + ((Electric) v).getRangeKm() + " км");
             }
         }
     }

@@ -1,34 +1,17 @@
 package part5.part5_1;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Lion extends Predator {
 
-public class Lion extends Predator implements Trainable {
-    private final List<String> commands = new ArrayList<>();
-
-    public Lion(String name, int age, double weight, int energyLevel) {
-        super(name, age, weight, energyLevel);
+    public Lion(String name, int age, double weight) {
+        super(name, age, weight);
     }
 
     @Override
     public void makeSound() {
-        System.out.println("Р-р-р!");
+        System.out.println(name + ": Р-р-р-р!!!");
     }
 
     public void roar() {
-        System.out.println(name + " громко рычит!");
-    }
-
-    @Override
-    public void train(String command) {
-        // TODO: добавьте команду в список, если она непустая.
-        // ▼ ВАШ КОД ЗДЕСЬ ▼
-
-        // ▲ КОНЕЦ ВАШЕГО КОДА ▲
-    }
-
-    @Override
-    public List<String> listCommands() {
-        return new ArrayList<>(commands);
+        System.out.println(name + " громко рычит: РРРРРРР!");
     }
 }
